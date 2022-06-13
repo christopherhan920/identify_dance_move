@@ -1,18 +1,12 @@
 name: idm
 dependencies:
   - pip
-  - findspark
-  - ipykernel
-  - ipython
-  - ipython_genutils
-  - ipywidgets
   - matplotlib
   - numpy
   - pandas
   - requests
   - scikit-learn
-  - seaborn
-  - tensorflow
+# - tensorflow
 #   - pip: 
 #        - tensorflow-data-validation
 # prefix: /home/
