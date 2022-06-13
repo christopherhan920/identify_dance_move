@@ -4,7 +4,7 @@
 Recommended to download Miniconda (and Git is required if you don't have it already).
 Once you have conda installed, run
 
-> conda env install -f environment.yml
+> conda env create -f environment.yml
 
 This will set up a conda environment for you.
 
