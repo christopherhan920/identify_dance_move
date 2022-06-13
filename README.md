@@ -1,5 +1,13 @@
-# identify_dance_move
+# Identify Dance Move
 ## Dependencies
+
+Recommended to download Miniconda (and Git is required if you don't have it already).
+Once you have conda installed, run
+
+> conda env install -f environment.yml
+
+This will set up a conda environment for you.
+
 #### Open Cv
 If installing through Conda 
 > conda install opencv -c conda-forge
