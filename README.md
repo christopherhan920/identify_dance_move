@@ -8,6 +8,10 @@ Once you have conda installed, run
 
 This will set up a conda environment for you.
 
+NOTE FOR OURSELVES:
+- try specifying Python version
+- May have to downgrade Python
+
 #### Open Cv
 If installing through Conda 
 > conda install opencv -c conda-forge
