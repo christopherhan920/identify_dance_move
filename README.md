@@ -8,9 +8,9 @@ Once you have conda installed, run
 
 This will set up a conda environment for you.
 
-Run the following to update the environment.
-
-> conda env update -f environment.yml --prune
+NOTE FOR OURSELVES:
+- try specifying Python version
+- May have to downgrade Python
 
 #### Open Cv
 If installing through Conda 
@@ -23,6 +23,6 @@ If installing through Conda
 > pip install mediapipe
 
 You many need to downgrade protobuf.
-You can uninstall
+You can uninstall # a why for later
 >pip uninstall protobuf
 >pip install protobuf~=3.19.0
