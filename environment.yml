@@ -1,12 +1,17 @@
 name: idm
+channels:
+  - conda-forge
 dependencies:
+  - python==3.8.13
   - pip
   - matplotlib
   - numpy
   - pandas
   - requests
   - scikit-learn
-# - tensorflow
-#   - pip: 
-#        - tensorflow-data-validation
+  - opencv
+  - pip: 
+       - cvzone
+       - mediapipe
+       - protobuf~=3.19.0
 # prefix: /home/
