@@ -2,7 +2,8 @@ name: idm
 channels:
   - conda-forge
 dependencies:
-  - python==3.8.13
+  - python
+  - jupyter
   - pip
   - matplotlib
   - numpy
@@ -10,8 +11,10 @@ dependencies:
   - requests
   - scikit-learn
   - opencv
-  - pip: 
-       - cvzone
-       - mediapipe
-       - protobuf~=3.19.0
+  - keras
+  - tensorflow
+  # - pip: 
+  #      - cvzone
+  #      - mediapipe
+  #      - protobuf~=3.19.0
 # prefix: /home/
