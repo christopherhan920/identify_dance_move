@@ -1,2 +1,5 @@
 # Set up to ignore the data files
 data/
+
+.DS_Store
+.ipynb_checkpoints
