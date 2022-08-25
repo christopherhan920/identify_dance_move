@@ -11,6 +11,7 @@ while True:
     if bboxInfo:
         center = bboxInfo["center"]
         cv2.circle(img, center, 5, (255, 0, 255), cv2.FILLED)
+        print(lmList)
 
     cv2.imshow("Image", img)
     if cv2.waitKey(1) & 0xFF == ord('q'):

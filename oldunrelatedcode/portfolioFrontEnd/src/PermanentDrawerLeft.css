@@ -1,0 +1,41 @@
+.Root {
+    display: 'flex',
+}
+
+.AppBar {
+    width: calc(100% - 240px);
+    margin-left: 240px;
+}
+
+.Drawer {
+    width: drawerWidth;
+    flex-shrink: 0;
+}
+.button{
+    color: aqua;
+}
+  
+.DrawerPaper {
+    width: drawerWidth;
+}
+.Toolbar{ 
+    min-height: 56px;
+}
+  
+.Content {
+    flex-grow: 1;
+    background-color: backgroundColor;
+}
+  
+.Splitscreen{
+    display: 'flex';
+    flex-direction: 'row';
+}
+
+.Leftpane{
+    width: '50%';
+}
+  
+.Rightpane{
+    width: '50%';
+}
