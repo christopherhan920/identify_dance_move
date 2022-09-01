@@ -3,6 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - python
+  - flask
   - jupyter
   - pip
   - matplotlib
@@ -13,6 +14,8 @@ dependencies:
   - opencv
   - keras
   - tensorflow
+  - requests
+  # - endpoints
   # - pip: 
   #      - cvzone
   #      - mediapipe
