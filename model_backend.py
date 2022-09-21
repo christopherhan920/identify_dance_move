@@ -24,9 +24,9 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def GET():
     # testing loading model
-    model = keras.models.load_model(model_path)
-    return 'loaded model: {}'.format(model_path)
-    # return jsonify({'move_1': 'percentage_1', 'move_2': 'percentage_2', 'move_3': 'percentage_3', 'move_4': 'percentage_4'})
+    # model = keras.models.load_model(model_path)
+    # return 'loaded model: {}'.format(model_path)
+    return jsonify({'move_1': 'percentage_1', 'move_2': 'percentage_2', 'move_3': 'percentage_3', 'move_4': 'percentage_4'})
 
 # Helper functions for the POST method
 
@@ -109,16 +109,24 @@ def predict(video: np.array) -> dict:
     print('predicting')
 
 
-@app.route('/', methods=['POST'])
+@app.route('/post', methods=['POST'])
 def POST():
     # convert video into byte array
     # decode it into video
 
-    video_array = json.loads(request.data)
+    temp_path = 'request_video.mov'
+    video_bytes = request.data
 
+    if os.path.isfile(temp_path):
+        os.remove(temp_path)
 
+    with open(temp_path, 'wb') as out_file:
+        out_file.write(request.data)
+    
+    video_array = load_video(temp_path)
     # from the point the video is a numpy array
-
+    print(video_array)
+    
     return jsonify(video_array)
 
 app.run(debug=True)
