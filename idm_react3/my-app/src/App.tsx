@@ -4,10 +4,10 @@ import './App.css';
 import axios from 'axios'
 
 class App extends Component{
-  // constructor(props){
-  //   super(props);
-  //   this.upload = this.upload.bind(this);
-  // }
+  constructor(props: {} | Readonly<{}>){
+    super(props);
+    this.upload = this.upload.bind(this);
+  }
   state = {
     file: null
   }
@@ -15,6 +15,7 @@ class App extends Component{
   upload(){
     console.log('upload')
     let file = this.state.file
+    console.log(file)
     // axios.post({
     //   url:'http://127.0.0.1:5000/',
     //   method: 'POST',
@@ -27,11 +28,11 @@ class App extends Component{
     // })
   }
 
-  // handleFile(e){
-  //   let file = e.target.files[0]
-  //   console.log(file)
-  //   this.setState({file:file})
-  // }
+  handleFile(e: React.ChangeEvent<HTMLInputElement>){
+    const file = (e.target as HTMLInputElement).files || [];
+    console.log(file)
+    this.setState({file:file})
+  }
 
   render(){
     return (
@@ -39,7 +40,7 @@ class App extends Component{
         <header className="App-header">
           <form>
             <h1>Dance File Upload</h1>
-            {/* <input type="file" name="file" onChange={(e) => this.handleFile(e)}/> */}
+            <input type="file" name="file" onChange={(e) => this.handleFile(e)}/>
             <button type="submit" onClick={this.upload}> Upload</button>
           </form>
         </header>
