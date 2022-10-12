@@ -8,6 +8,7 @@ class App extends Component{
     super(props);
     this.upload = this.upload.bind(this);
   }
+
   state = {
     file: null
   }

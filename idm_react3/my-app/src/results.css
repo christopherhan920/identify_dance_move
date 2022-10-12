@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
+.container {
+    font-family: 'Abel';
+    height: 100vh;
+    width: 100vw;
+}
+
+.svg {
+    fill: darkgray;
+    height: 50px;
+    width: 50px;
+    margin: 1%;
+    x: 100;
+    y: 100;
+}
+
+.move-name {
+    font-size: 500%;
+    margin-right: 10%;
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 0;
+    line-height: 60%;
+}
+
+.top-block {
+    background-color: white;
+    height: 50%;
+    width: 100%;
+    position: relative;
+}
+
+.bottom-block {
+    background-color: #7B91B3;
+    color: #FFFFFF;
+    height: 50%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    font-size: xx-large;
+    max-width: 100%;
+}
+
+.bottom-left-block {
+    margin-top: 3%;
+    margin-left: 6%;
+}
+
+.bottom-right-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 25%;
+}
