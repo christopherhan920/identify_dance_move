@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import React, {Component} from 'react';
 import './App.css';
 import axios from 'axios'
+import * as fs from 'fs'
 
 class App extends Component{
   constructor(props: {} | Readonly<{}>){
@@ -17,24 +18,42 @@ class App extends Component{
     console.log('upload')
     let file = this.state.file
     console.log(file)
-    // axios.post({
-    //   url:'http://127.0.0.1:5000/',
-    //   method: 'POST',
-    //   headers:{
+    // let fileData = fs.readFileSync(file).toString('hex')
 
-    //   },
-    //   data: file,
-    // }).then((res) =>{
-    //   console.log('done')
-    // })
+    const bodyFormData = new FormData()
+    axios.post("http://127.0.0.1:5000/",{
+      data: file
+    })
+    .then((response) => {
+      console.log(response)
+    })
   }
 
   handleFile(e: React.ChangeEvent<HTMLInputElement>){
-    const file = (e.target as HTMLInputElement).files || [];
+    const file = (e.target as HTMLInputElement).files;
     console.log(file)
-    this.setState({file:file})
-  }
+    const reader = new FileReader()
+    const fileByteArray = [];
+    console.log('hey')
+    if(file === null){
+    console.log('null')
+      return
+    }
+    else{
+      reader.readAsArrayBuffer(file[0]);
 
+      console.log('not null')
+      reader.onloadend = (evt) => {
+      if (evt.target.readyState === FileReader.DONE) {
+        const array = new Uint8Array(evt.target.result[0])
+        array.forEach(element => fileByteArray.push(element))
+      }
+      console.log(fileByteArray)
+    }
+  }
+  this.setState({file:file})
+}
+  
   render(){
     return (
       <div className="App">
