@@ -21,11 +21,11 @@ class App extends Component{
     // let fileData = fs.readFileSync(file).toString('hex')
 
     const bodyFormData = new FormData()
-    axios.post("http://127.0.0.1:5000/",{
+    axios.post("http://127.0.0.1:5000/post",{
       data: file
     })
     .then((response) => {
-      console.log(response)
+      console.log(response.data)
     })
   }
 
@@ -40,18 +40,24 @@ class App extends Component{
       return
     }
     else{
-      reader.readAsArrayBuffer(file[0]);
+      var arrayBuffer = reader.readAsArrayBuffer(file[0]);
 
       console.log('not null')
       reader.onloadend = (evt) => {
       if (evt.target.readyState === FileReader.DONE) {
-        const array = new Uint8Array(evt.target.result[0])
+        console.log(arrayBuffer)
+        console.log(evt.target.result)
+        console.log(evt.target.result[0])
+        // var array = new Uint8Array(arrayBuffer)
+        var array = new Uint8Array(arrayBuffer[0])
+        // array = new Uint8Array(evt.target.result)
+        array = new Uint8Array(evt.target.result[0])
         array.forEach(element => fileByteArray.push(element))
       }
       console.log(fileByteArray)
     }
   }
-  this.setState({file:file})
+  this.setState({file:fileByteArray})
 }
   
   render(){
