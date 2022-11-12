@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split
 import cv2
 import os
 import pickle
+import base58
 
 # PARAMETERS
 IMG_SIZE = 224
@@ -118,19 +119,23 @@ def load_model():
 #     # take the input video as np.array and return prediction
 #     print('predicting')
 
-
+# @Crossorigin
 @app.route('/post', methods=['POST'])
 def POST():
     # convert video into byte array
     # decode it into video
 
-    temp_path = 'request_video.mov'
+    #temp_path = "http://Users/chris/identify_dance_move/output_video.mov"
+    temp_path = 'output_video.mov'
+
     video_bytes = request.data
+
+    # print("Request.data: ", request.data)
 
     if os.path.isfile(temp_path):
         os.remove(temp_path)
 
-    with open(temp_path, 'wb') as out_file:
+    with open(temp_path, "wb") as out_file:
         out_file.write(video_bytes)
     
     video_array = preprocess_video(temp_path)
@@ -143,6 +148,8 @@ def POST():
                     'Charleston': str(result[2]),
                     'Monastery': str(result[3])
                     }
+    # print(result_dict)
+    print(video_bytes)
     return jsonify(result_dict)
 
 app.run(debug=True)

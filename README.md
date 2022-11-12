@@ -37,6 +37,10 @@ You can uninstall # a why for later
 >pip uninstall protobuf
 >pip install protobuf~=3.19.0
 
+#### Developer tools
+- npm (comes with Node.js)
+- React
+
 ## Contributors (alphabetical order)
 - Chris Han
 - Chris Ong
