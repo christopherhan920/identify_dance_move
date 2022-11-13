@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 import cv2
 import os
 import pickle
-import base58
+# import base58
 
 # PARAMETERS
 IMG_SIZE = 224
@@ -128,15 +128,17 @@ def POST():
     #temp_path = "http://Users/chris/identify_dance_move/output_video.mov"
     temp_path = 'output_video.mov'
 
-    video_bytes = request.data
-
-    # print("Request.data: ", request.data)
+    # Read in 
+    video_bytes = request.data # read in the request data
+    a = json.loads(video_bytes.decode())['data'] # decodes it into dictionary
+    list_of_integers = list(a.values()) # converts the values into a list of integers
+    byte_version = bytes(list_of_integers) # converts the list of integers to bytes
 
     if os.path.isfile(temp_path):
         os.remove(temp_path)
 
-    with open(temp_path, "wb") as out_file:
-        out_file.write(video_bytes)
+    with open(temp_path, "wb") as out_file: # write out the bytes back into a video
+        out_file.write(byte_version)
     
     video_array = preprocess_video(temp_path)
     # from the point the video is a numpy array
@@ -148,8 +150,8 @@ def POST():
                     'Charleston': str(result[2]),
                     'Monastery': str(result[3])
                     }
-    # print(result_dict)
-    print(video_bytes)
+    print(result_dict)
+    # print(video_bytes)
     return jsonify(result_dict)
 
 app.run(debug=True)

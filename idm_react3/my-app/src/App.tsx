@@ -27,7 +27,8 @@ class App extends Component{
     axios.post('http://127.0.0.1:5000/post', {
       data: file
       // headers: new Headers({
-      //   'Access-Control-Allow-Origin': '*',
+      //   //'Content-Type': 'application/octet-stream'
+      //   //'Access-Control-Allow-Origin': '*',
       //   // "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, UPDATE",
       //   // "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
       // })
@@ -66,7 +67,8 @@ class App extends Component{
         // }
 
         // console.log("Before setting state: " + this.state.file)
-        this.state.file = fileByteArray.toString()// change, not safe..
+        // this.state.file = fileByteArray.toString()// change, not safe..
+        this.state.file = fileByteArray // change, not safe..
         // console.log("Converted to hex: " + fs.readFileSync(fileByteArray as any).toString('hex'))
         // this.setState({file : fileByteArray})
         console.log("After setting state: " + this.state.file)
