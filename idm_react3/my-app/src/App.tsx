@@ -11,32 +11,45 @@ class App extends Component{
   }
 
   state = {
-    file: null
+    file: null,
+    response: ""
   }
 
-  upload(){
-    console.log("I made it into upload()")
-    // let file = fs.readFileSync(this.state.file as any).toString('hex')
+  upload() {
+    // console.log("I made it into upload()")
     let file = this.state.file
-    console.log("File: " + file)
-    // let fileData = fs.readFileSync(file).toString('hex')
+    // console.log("File: " + file)
 
-    // const bodyFormData = new FormData()
-    console.log("I make it to right before the post")
-    // axios.defaults.headers.post['Content-Type'] = 'application/octet-stream';
+    // console.log("I make it to right before the post")
+
     axios.post('http://127.0.0.1:5000/post', {
       data: file
-      // headers: new Headers({
-      //   //'Content-Type': 'application/octet-stream'
-      //   //'Access-Control-Allow-Origin': '*',
-      //   // "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, UPDATE",
-      //   // "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
-      // })
     })
     .then((response) => {
-      console.log("Response.data: " + response.data)
+      console.log("I make it into then()")
+      console.log("This is the response from App.tsx: " + response.data['Stick and Roll'])
+      this.setState({response: response.data['Stick and Roll']})
+
+      return response.data
+    })
+    .catch(error => {
+      console.log('POST Error: ', error)
     })
   }
+
+  componentDidMount() {
+    axios.get('http://127.0.0.1:5000/get', {
+      data: this.state.response
+    })
+    .then((res) => {
+      console.log("Response: ", res.data['GET Request'])
+      this.setState({response: res.data['GET Request']})
+    })
+    .catch(error => {
+      console.log('GET Error: ', error)
+    })
+  }
+
 
   async handleFile(e: React.ChangeEvent<HTMLInputElement>){
     const file = (e.target as HTMLInputElement).files;
@@ -71,75 +84,63 @@ class App extends Component{
         this.state.file = fileByteArray // change, not safe..
         // console.log("Converted to hex: " + fs.readFileSync(fileByteArray as any).toString('hex'))
         // this.setState({file : fileByteArray})
-        console.log("After setting state: " + this.state.file)
+        // console.log("After setting state: " + this.state.file)
       }
       // this.state.file = byteFile
       // console.log("Type after setting state: " + typeof(this.state.file))
       console.log("Done with handlefile()")
     }
   }
-
-  // console.log("Before setting state: " + this.state.file)
-  // this.state.file = fileByteArray // change, not safe..
-  // // this.setState({file : "HJELLLOOOO"})
-  // console.log("After setting state: " + this.state.file)
 }
-
-// Another idea
-
-// readFile(file) {
-//   return new Promise((resolve, reject) => {
-//     // Create file reader
-//     let reader = new FileReader()
-//     // Register event listeners
-//     reader.addEventListener("loadend", e => resolve(e.target.result))
-//     reader.addEventListener("error", reject)
-//     // Read file
-//     reader.readAsArrayBuffer(file)
-//   })
-// }
-
-// async getAsByteArray(file) {
-//   return new Uint8Array(await this.readFile(file) as any)
-// }
-
-
 
   
   render(){
-    return (
-      <div className="App">
-        <header className="App-header">
-          <form>
-            <h1>Dance File Upload</h1>
-            <input type="file" name="file" onChange={(e) => this.handleFile(e)}/>
-            <button type="submit" onClick={this.upload}> Upload</button>
-          </form>
-        </header>
-      </div>
-    );
+    // For some reason, the below code returns 'cannot POST /' page: 
+
+    // return (
+    //   <div className="App">
+    //     <header className="App-header">
+    //       <form method="post">
+    //         <h1>Dance File Upload</h1>
+    //         <input type="file" name="file" onChange={(e) => this.handleFile(e)}/>
+    //         <button type="submit" onClick={this.upload}>Upload</button>
+    //         <p>Response.data: </p>
+
+    //         {
+    //           this.state.response.length ? 
+    //             <p>{this.state.response}</p> 
+    //             : "no change"
+    //         }
+
+    //       </form>
+    //     </header>
+    //   </div>
+    // );
+
+    return this.state.response
+            ? <div className="App-header">
+                <h1>Response changed: </h1> 
+                {this.state.response}
+            </div>
+            : 
+            <div className="App">
+              <header className="App-header">
+                <form>
+                  <h1>Dance File Upload</h1>
+                  <input type="file" name="file" onChange={(e) => this.handleFile(e)}/>
+                  <button type="submit" onClick={this.upload}> Upload</button>
+                  {this.state.response}
+                </form>
+              </header>
+            </div>
+
+    // return (
+    //   <div>
+    //     <h1>Response: </h1>
+    //     {this.state.response}
+    //   </div>
+    // )
   }
 }
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a>
-//           Learn React
-//         </a>
-//         <form>
-//           <h1>Dance File Upload</h1>
-//           <input type="file" name="file" onChange={(e) => this.handleFile(e)}/>
-//           <button type="submit" onClick={upload}>Upload</button>
-//         </form>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;

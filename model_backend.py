@@ -22,13 +22,16 @@ model_path = 'model_1_09052022'
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
+@app.route('/get', methods=['GET'])
 def GET():
     # testing loading model
     # model = keras.models.load_model(model_path)
     # return 'loaded model: {}'.format(model_path)
-    return jsonify({'move_1': 'percentage_1', 'move_2': 'percentage_2', 'move_3': 'percentage_3', 'move_4': 'percentage_4'})
-
+    # return {'move_1': 'percentage_1', 'move_2': 'percentage_2', 'move_3': 'percentage_3', 'move_4': 'percentage_4'}
+    if not request.data:
+        return jsonify({"GET Request": "Empty GET Response"})
+    else:
+        return jsonify({"GET Request": request.data})
 # Helper functions for the POST method
 
 def crop_center_square(frame):
@@ -150,8 +153,10 @@ def POST():
                     'Charleston': str(result[2]),
                     'Monastery': str(result[3])
                     }
-    print(result_dict)
+    # print('Results: {}'.format(jsonify(result_dict)))
+    print('Results: {}'.format(result_dict))
     # print(video_bytes)
     return jsonify(result_dict)
+    # return result_dict
 
 app.run(debug=True)
